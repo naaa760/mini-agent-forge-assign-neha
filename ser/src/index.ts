@@ -16,7 +16,9 @@ app.use(helmet());
 app.use(
   cors({
     origin:
-      process.env.NODE_ENV === "production" ? false : "http://localhost:3000",
+      process.env.NODE_ENV === "production"
+        ? ["https://your-frontend-app.vercel.app", /\.vercel\.app$/]
+        : "http://localhost:3000",
     credentials: true,
   })
 );
@@ -58,4 +60,10 @@ async function startServer() {
   }
 }
 
-startServer();
+// For local development
+if (process.env.NODE_ENV !== "production") {
+  startServer();
+}
+
+// Export for Vercel
+export default app;

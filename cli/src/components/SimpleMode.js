@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { cn } from "../lib/utils";
+import { API_ENDPOINTS } from "../lib/config";
 
 export default function SimpleMode() {
   const [prompt, setPrompt] = useState("");
@@ -46,7 +47,7 @@ export default function SimpleMode() {
     setHistory((prev) => [currentRun, ...prev]);
 
     try {
-      const response = await fetch("http://localhost:3001/api/run", {
+      const response = await fetch(API_ENDPOINTS.run, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

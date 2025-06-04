@@ -13,6 +13,7 @@ import { MiniMap } from "@reactflow/minimap";
 import "@reactflow/core/dist/style.css";
 
 import { cn } from "../lib/utils";
+import { API_ENDPOINTS } from "../lib/config";
 
 const nodeTypes = {
   promptNode: PromptNode,
@@ -248,7 +249,7 @@ export default function VisualMode() {
     );
 
     try {
-      const response = await fetch("http://localhost:3001/api/run", {
+      const response = await fetch(API_ENDPOINTS.run, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
