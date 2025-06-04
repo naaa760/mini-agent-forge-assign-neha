@@ -9,7 +9,7 @@ export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   (isDevelopment
     ? "http://localhost:3001"
-    : "https://mini-agent-forge-assign-neha.vercel.app/"); // Replace with actual URL when deploying
+    : "https://mini-agent-forge-assign-neha.onrender.com/"); // Replace with actual URL when deploying
 
 export const API_ENDPOINTS = {
   run: `${API_BASE_URL}/api/run`,
