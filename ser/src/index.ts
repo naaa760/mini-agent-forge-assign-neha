@@ -4,7 +4,7 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import { runRouter } from "./routes/run";
 import { initDatabase } from "./database/init";
-import { initRedis } from "./redis/client";
+// import { initRedis } from "./redis/client"; // DISABLED FOR PRODUCTION
 
 dotenv.config();
 
@@ -53,7 +53,7 @@ app.use(
 async function startServer() {
   try {
     await initDatabase();
-    await initRedis(); // This will skip automatically in production
+    // await initRedis(); // DISABLED FOR PRODUCTION - NO REDIS
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);

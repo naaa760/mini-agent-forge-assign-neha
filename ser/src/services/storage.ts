@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { redisClient } from "../redis/client";
+// import { redisClient } from "../redis/client"; // DISABLED FOR PRODUCTION
 
 const pool = new Pool({
   connectionString:
@@ -47,54 +47,12 @@ export async function saveRun(data: RunData): Promise<void> {
 }
 
 export async function cacheRun(userKey: string, run: CachedRun): Promise<void> {
-  // Skip Redis in production or if client doesn't exist
-  if (process.env.NODE_ENV === "production" || !redisClient) {
-    console.log("Skipping cache in production (no Redis)");
-    return;
-  }
-
-  const cacheKey = `user_runs:${userKey}`;
-
-  try {
-    // Get existing runs
-    const existingRuns = await redisClient.lRange(cacheKey, 0, -1);
-    const runs = existingRuns.map((r) => JSON.parse(r));
-
-    // Add new run at the beginning
-    runs.unshift(run);
-
-    // Keep only last 10 runs
-    const recent10 = runs.slice(0, 10);
-
-    // Clear and repopulate the list
-    await redisClient.del(cacheKey);
-    if (recent10.length > 0) {
-      await redisClient.rPush(
-        cacheKey,
-        recent10.map((r) => JSON.stringify(r))
-      );
-    }
-
-    // Set expiration to 1 hour
-    await redisClient.expire(cacheKey, 3600);
-  } catch (error) {
-    console.error("Cache error:", error);
-  }
+  // REDIS COMPLETELY DISABLED FOR PRODUCTION
+  console.log("Skipping cache - Redis disabled for production deployment");
+  return;
 }
 
 export async function getCachedRuns(userKey: string): Promise<CachedRun[]> {
-  // Skip Redis in production or if client doesn't exist
-  if (process.env.NODE_ENV === "production" || !redisClient) {
-    return [];
-  }
-
-  const cacheKey = `user_runs:${userKey}`;
-
-  try {
-    const runs = await redisClient.lRange(cacheKey, 0, -1);
-    return runs.map((r) => JSON.parse(r));
-  } catch (error) {
-    console.error("Get cache error:", error);
-    return [];
-  }
+  // REDIS COMPLETELY DISABLED FOR PRODUCTION
+  return [];
 }
