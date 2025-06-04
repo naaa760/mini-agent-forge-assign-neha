@@ -1,0 +1,40 @@
+{
+  "name": "agent-runner-backend",
+  "version": "1.0.0",
+  "description": "Backend for the agent runner application",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "dotenv": "^16.4.5",
+    "pg": "^8.11.3",
+    "redis": "^4.6.13",
+    "zod": "^3.22.4",
+    "groq-sdk": "^0.3.3",
+    "serpapi": "^2.0.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/pg": "^8.11.2",
+    "@types/uuid": "^9.0.8",
+    "typescript": "^5.3.3",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "ts-jest": "^29.1.2",
+    "supertest": "^6.3.4",
+    "@types/supertest": "^6.0.2"
+  }
+}

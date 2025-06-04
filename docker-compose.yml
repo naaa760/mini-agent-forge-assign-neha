@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build: ./ser
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - DATABASE_URL=postgresql://neondb_owner:npg_OIHZWylG6x5v@ep-nameless-truth-a8su5bem-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./ser:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./cli
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    volumes:
+      - ./cli:/app
+      - /app/node_modules
+# No volumes needed since we're using Neon cloud database
