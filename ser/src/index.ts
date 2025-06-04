@@ -53,13 +53,7 @@ app.use(
 async function startServer() {
   try {
     await initDatabase();
-
-    // Skip Redis in production if not available
-    if (process.env.NODE_ENV !== "production") {
-      await initRedis();
-    } else {
-      console.log("Skipping Redis in production");
-    }
+    await initRedis(); // This will skip automatically in production
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
@@ -70,10 +64,8 @@ async function startServer() {
   }
 }
 
-// For local development
-if (process.env.NODE_ENV !== "production") {
-  startServer();
-}
+// Always start server (works for both dev and production)
+startServer();
 
-// Export for Vercel
+// Export for Vercel/Render
 export default app;

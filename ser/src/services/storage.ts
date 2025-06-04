@@ -47,8 +47,8 @@ export async function saveRun(data: RunData): Promise<void> {
 }
 
 export async function cacheRun(userKey: string, run: CachedRun): Promise<void> {
-  // Skip Redis in production
-  if (process.env.NODE_ENV === "production") {
+  // Skip Redis in production or if client doesn't exist
+  if (process.env.NODE_ENV === "production" || !redisClient) {
     console.log("Skipping cache in production (no Redis)");
     return;
   }
@@ -83,8 +83,8 @@ export async function cacheRun(userKey: string, run: CachedRun): Promise<void> {
 }
 
 export async function getCachedRuns(userKey: string): Promise<CachedRun[]> {
-  // Skip Redis in production
-  if (process.env.NODE_ENV === "production") {
+  // Skip Redis in production or if client doesn't exist
+  if (process.env.NODE_ENV === "production" || !redisClient) {
     return [];
   }
 
