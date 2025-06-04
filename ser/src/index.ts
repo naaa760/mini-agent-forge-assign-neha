@@ -17,7 +17,11 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? ["https://your-frontend-app.vercel.app", /\.vercel\.app$/]
+        ? [
+            "https://mini-agent-forge-assign-neha.vercel.app",
+            /\.vercel\.app$/,
+            /\.render\.com$/,
+          ]
         : "http://localhost:3000",
     credentials: true,
   })
@@ -49,7 +53,13 @@ app.use(
 async function startServer() {
   try {
     await initDatabase();
-    await initRedis();
+
+    // Skip Redis in production if not available
+    if (process.env.NODE_ENV !== "production") {
+      await initRedis();
+    } else {
+      console.log("Skipping Redis in production");
+    }
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
