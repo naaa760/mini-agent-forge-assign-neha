@@ -16,12 +16,8 @@ if [ ! -f "ser/.env" ]; then
 PORT=3001
 NODE_ENV=development
 
-# Database
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_DB=agent_runner
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=password
+# Database (Neon)
+DATABASE_URL=postgresql://neondb_owner:npg_OIHZWylG6x5v@ep-nameless-truth-a8su5bem-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
 
 # Redis
 REDIS_HOST=localhost
