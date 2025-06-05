@@ -25,70 +25,171 @@ function PromptNode({ data, selected }) {
   return (
     <div
       className={cn(
-        "px-6 py-4 shadow-lg rounded-2xl bg-white border-2 min-w-64",
-        selected ? "border-blue-500" : "border-gray-200"
+        "px-6 py-5 shadow-lg rounded-2xl bg-gray-700 border-2 min-w-80",
+        selected
+          ? "border-blue-500 ring-4 ring-blue-500/30"
+          : "border-gray-600 hover:border-blue-400"
       )}
     >
-      <div className="flex items-center mb-2">
-        <span className="text-xl mr-2">💭</span>
-        <div className="font-semibold text-gray-700">Prompt</div>
+      <div className="flex items-center mb-4">
+        <div className="p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl mr-3">
+          <span className="text-xl text-white">💭</span>
+        </div>
+        <div>
+          <div
+            className="font-bold text-lg text-white"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            AI Prompt
+          </div>
+          <div
+            className="text-xs text-gray-300"
+            style={{ fontFamily: "'Quicksand', sans-serif" }}
+          >
+            Define your instruction
+          </div>
+        </div>
       </div>
-      <textarea
-        value={data.prompt}
-        onChange={(e) => data.onPromptChange(e.target.value)}
-        placeholder="Enter your instruction..."
-        className="w-full p-2 border border-gray-300 rounded text-sm resize-none"
-        rows={3}
-        maxLength={500}
-      />
-      <div className="text-xs text-gray-500 mt-1 text-right">
-        {data.prompt?.length || 0}/500
+      <div className="relative">
+        <textarea
+          value={data.prompt}
+          onChange={(e) => data.onPromptChange(e.target.value)}
+          placeholder="Enter your AI instruction here..."
+          className="w-full p-4 border-2 border-gray-600 rounded-2xl text-sm resize-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 transition-all duration-200 bg-gray-800 text-white placeholder:text-gray-400"
+          style={{ fontFamily: "'Open Sans', sans-serif" }}
+          rows={4}
+          maxLength={1000}
+        />
+        <div
+          className="absolute bottom-2 right-2 text-xs text-gray-400"
+          style={{ fontFamily: "'Quicksand', sans-serif" }}
+        >
+          {data.prompt?.length || 0}/1000
+        </div>
+      </div>
+      <div className="mt-3 flex items-center justify-between">
+        <div className="flex items-center text-xs text-gray-400">
+          <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+          <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
+            Input Node
+          </span>
+        </div>
+        <div
+          className="text-xs text-gray-400"
+          style={{ fontFamily: "'Quicksand', sans-serif" }}
+        >
+          Start here →
+        </div>
       </div>
     </div>
   );
 }
 
 function ToolNode({ data, selected }) {
+  const tools = [
+    {
+      id: "web-search",
+      name: "Web Search",
+      icon: "🔍",
+      description: "Search the internet",
+      color: "blue",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      id: "calculator",
+      name: "Calculator",
+      icon: "🧮",
+      description: "Math calculations",
+      color: "purple",
+      gradient: "from-purple-500 to-pink-500",
+    },
+  ];
+
   return (
     <div
       className={cn(
-        "px-6 py-4 shadow-lg rounded-2xl bg-white border-2 min-w-48",
-        selected ? "border-purple-500" : "border-gray-200"
+        "px-6 py-5 shadow-lg rounded-2xl bg-gray-700 border-2 min-w-72",
+        selected
+          ? "border-purple-500 ring-4 ring-purple-500/30"
+          : "border-gray-600 hover:border-purple-400"
       )}
     >
-      <div className="flex items-center mb-3">
-        <span className="text-xl mr-2">🛠️</span>
-        <div className="font-semibold text-gray-700">Tool</div>
+      <div className="flex items-center mb-4">
+        <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl mr-3">
+          <span className="text-xl text-white">🛠️</span>
+        </div>
+        <div>
+          <div
+            className="font-bold text-lg text-white"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            AI Tool
+          </div>
+          <div
+            className="text-xs text-gray-300"
+            style={{ fontFamily: "'Quicksand', sans-serif" }}
+          >
+            Choose processing method
+          </div>
+        </div>
       </div>
-      <div className="space-y-2">
-        <button
-          onClick={() => data.onToolChange("web-search")}
-          className={cn(
-            "w-full p-3 rounded-xl border text-left transition-all",
-            data.tool === "web-search"
-              ? "border-blue-500 bg-blue-50 text-blue-700"
-              : "border-gray-200 hover:border-blue-300"
-          )}
+      <div className="space-y-3">
+        {tools.map((tool) => (
+          <button
+            key={tool.id}
+            onClick={() => data.onToolChange(tool.id)}
+            className={cn(
+              "w-full p-4 rounded-2xl border-2 text-left transition-all duration-300 group",
+              "hover:scale-105",
+              data.tool === tool.id
+                ? `border-${tool.color}-500 bg-gradient-to-br ${tool.gradient} text-white shadow-lg`
+                : "border-gray-600 hover:border-gray-500 bg-gray-800 hover:bg-gray-600 text-white"
+            )}
+          >
+            <div className="flex items-center">
+              <span className="text-xl mr-3">{tool.icon}</span>
+              <div className="flex-1">
+                <div
+                  className={cn(
+                    "font-semibold",
+                    data.tool === tool.id ? "text-white" : "text-white"
+                  )}
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {tool.name}
+                </div>
+                <div
+                  className={cn(
+                    "text-xs",
+                    data.tool === tool.id ? "text-white/80" : "text-gray-300"
+                  )}
+                  style={{ fontFamily: "'Open Sans', sans-serif" }}
+                >
+                  {tool.description}
+                </div>
+              </div>
+              {data.tool === tool.id && (
+                <div className="text-white">
+                  <span className="text-sm">✓</span>
+                </div>
+              )}
+            </div>
+          </button>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center justify-between">
+        <div className="flex items-center text-xs text-gray-400">
+          <div className="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+          <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
+            Processing Node
+          </span>
+        </div>
+        <div
+          className="text-xs text-gray-400"
+          style={{ fontFamily: "'Quicksand', sans-serif" }}
         >
-          <div className="flex items-center">
-            <span className="mr-2">🔍</span>
-            <span className="font-medium">Web Search</span>
-          </div>
-        </button>
-        <button
-          onClick={() => data.onToolChange("calculator")}
-          className={cn(
-            "w-full p-3 rounded-xl border text-left transition-all",
-            data.tool === "calculator"
-              ? "border-purple-500 bg-purple-50 text-purple-700"
-              : "border-gray-200 hover:border-purple-300"
-          )}
-        >
-          <div className="flex items-center">
-            <span className="mr-2">🧮</span>
-            <span className="font-medium">Calculator</span>
-          </div>
-        </button>
+          ← Process →
+        </div>
       </div>
     </div>
   );
@@ -98,34 +199,66 @@ function ResultNode({ data, selected }) {
   return (
     <div
       className={cn(
-        "px-6 py-4 shadow-lg rounded-2xl bg-white border-2 min-w-64 max-w-80",
-        selected ? "border-green-500" : "border-gray-200"
+        "px-6 py-5 shadow-lg rounded-2xl bg-gray-700 border-2 min-w-80",
+        selected
+          ? "border-green-500 ring-4 ring-green-500/30"
+          : "border-gray-600 hover:border-green-400"
       )}
     >
-      <div className="flex items-center mb-2">
-        <span className="text-xl mr-2">✨</span>
-        <div className="font-semibold text-gray-700">Result</div>
+      <div className="flex items-center mb-4">
+        <div className="p-2 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl mr-3">
+          <span className="text-xl text-white">📋</span>
+        </div>
+        <div>
+          <div
+            className="font-bold text-lg text-white"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            AI Result
+          </div>
+          <div
+            className="text-xs text-gray-300"
+            style={{ fontFamily: "'Quicksand', sans-serif" }}
+          >
+            Generated output
+          </div>
+        </div>
       </div>
-      {data.isLoading ? (
-        <div className="flex items-center justify-center py-4">
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-          <span className="ml-2 text-gray-600">Processing...</span>
+      <div className="bg-gray-800 border border-gray-600 rounded-2xl p-4 max-h-48 overflow-y-auto">
+        {data.result ? (
+          <div
+            className="text-white text-sm leading-relaxed"
+            style={{ fontFamily: "'Open Sans', sans-serif" }}
+          >
+            {data.isLoading ? (
+              <div className="flex items-center">
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-400 mr-2"></div>
+                <span className="text-gray-300">Processing...</span>
+              </div>
+            ) : (
+              <pre className="whitespace-pre-wrap font-sans">{data.result}</pre>
+            )}
+          </div>
+        ) : (
+          <div className="text-gray-400 text-sm italic text-center py-4">
+            Result will appear here after execution
+          </div>
+        )}
+      </div>
+      <div className="mt-3 flex items-center justify-between">
+        <div className="flex items-center text-xs text-gray-400">
+          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+          <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
+            Output Node
+          </span>
         </div>
-      ) : data.result ? (
-        <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-          <p className="text-sm text-gray-700 leading-relaxed">{data.result}</p>
+        <div
+          className="text-xs text-gray-400"
+          style={{ fontFamily: "'Quicksand', sans-serif" }}
+        >
+          ← End result
         </div>
-      ) : data.error ? (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-sm text-red-700">{data.error}</p>
-        </div>
-      ) : (
-        <div className="p-3 bg-gray-50 border border-gray-200 rounded-lg">
-          <p className="text-sm text-gray-500">
-            Click &quot;Run Flow&quot; to see results
-          </p>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -143,7 +276,7 @@ const initialNodes = [
   {
     id: "tool-1",
     type: "toolNode",
-    position: { x: 450, y: 100 },
+    position: { x: 500, y: 100 },
     data: {
       tool: "web-search",
       onToolChange: () => {},
@@ -152,7 +285,7 @@ const initialNodes = [
   {
     id: "result-1",
     type: "resultNode",
-    position: { x: 750, y: 100 },
+    position: { x: 900, y: 100 },
     data: {
       result: "",
       isLoading: false,
@@ -163,14 +296,14 @@ const initialNodes = [
 
 const initialEdges = [
   {
-    id: "prompt-tool",
+    id: "e1-2",
     source: "prompt-1",
     target: "tool-1",
     animated: true,
     style: { stroke: "#3b82f6", strokeWidth: 2 },
   },
   {
-    id: "tool-result",
+    id: "e2-3",
     source: "tool-1",
     target: "result-1",
     animated: true,
@@ -183,7 +316,9 @@ export default function VisualMode() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [prompt, setPrompt] = useState("");
   const [tool, setTool] = useState("web-search");
-  const [isRunning, setIsRunning] = useState(false);
+  const [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Update node data when prompt/tool changes
   const updateNodeData = useCallback(
@@ -224,29 +359,13 @@ export default function VisualMode() {
 
   const runFlow = async () => {
     if (!prompt.trim()) {
-      updateNodeData("result-1", {
-        error: "Please enter a prompt first",
-        result: "",
-        isLoading: false,
-      });
+      setError("Please enter a prompt");
       return;
     }
 
-    setIsRunning(true);
-    updateNodeData("result-1", {
-      isLoading: true,
-      result: "",
-      error: "",
-    });
-
-    // Animate edges during execution
-    setEdges((eds) =>
-      eds.map((edge) => ({
-        ...edge,
-        animated: true,
-        style: { stroke: "#10b981", strokeWidth: 3 },
-      }))
-    );
+    setIsLoading(true);
+    setError("");
+    setResult("");
 
     try {
       const response = await fetch(API_ENDPOINTS.run, {
@@ -262,33 +381,11 @@ export default function VisualMode() {
       }
 
       const data = await response.json();
-
-      updateNodeData("result-1", {
-        result: data.result,
-        isLoading: false,
-        error: "",
-      });
+      setResult(data.result);
     } catch (err) {
-      updateNodeData("result-1", {
-        error: err.message || "An error occurred",
-        result: "",
-        isLoading: false,
-      });
+      setError(err.message || "An error occurred");
     } finally {
-      setIsRunning(false);
-      // Reset edge animation
-      setTimeout(() => {
-        setEdges((eds) =>
-          eds.map((edge) => ({
-            ...edge,
-            animated: true,
-            style:
-              edge.id === "prompt-tool"
-                ? { stroke: "#3b82f6", strokeWidth: 2 }
-                : { stroke: "#8b5cf6", strokeWidth: 2 },
-          }))
-        );
-      }, 2000);
+      setIsLoading(false);
     }
   };
 
@@ -298,84 +395,146 @@ export default function VisualMode() {
   );
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 p-6">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-            <span className="mr-2">🎨</span>
-            Visual Flow Builder
-          </h2>
-          <p className="text-gray-600 mt-1">
-            Drag and connect nodes to build your agent workflow
-          </p>
+    <div className="bg-gray-800 p-8 rounded-lg">
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h2
+              className="text-2xl font-bold text-white flex items-center"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              <span className="mr-3 text-3xl">🎨</span>
+              Visual AI Workflow
+            </h2>
+            <p
+              className="text-gray-300 mt-1"
+              style={{ fontFamily: "'Open Sans', sans-serif" }}
+            >
+              Build and visualize your AI agent pipeline with drag-and-drop
+              nodes
+            </p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 text-sm text-gray-400">
+              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+              <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
+                Flow Ready
+              </span>
+            </div>
+            <button
+              onClick={runFlow}
+              disabled={isLoading || !prompt.trim()}
+              className={cn(
+                "px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300",
+                "flex items-center space-x-2",
+                isLoading || !prompt.trim()
+                  ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl hover:scale-105"
+              )}
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              {isLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  <span>Running...</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-lg">▶️</span>
+                  <span>Execute Flow</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
-        <button
-          onClick={runFlow}
-          disabled={isRunning || !prompt.trim()}
-          className={cn(
-            "px-6 py-3 rounded-xl font-semibold transition-all duration-200",
-            "flex items-center space-x-2",
-            isRunning || !prompt.trim()
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-          )}
-        >
-          {isRunning ? (
-            <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              <span>Running...</span>
-            </>
-          ) : (
-            <>
-              <span>▶️</span>
-              <span>Run Flow</span>
-            </>
-          )}
-        </button>
-      </div>
 
-      {/* React Flow Canvas */}
-      <div className="h-96 border-2 border-gray-200 rounded-2xl overflow-hidden bg-gray-50">
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          nodeTypes={nodeTypes}
-          fitView
-          attributionPosition="bottom-left"
+        {/* Visual Flow */}
+        <div
+          className="bg-gray-900 border border-gray-700 rounded-2xl p-4"
+          style={{ height: "600px" }}
         >
-          <Background color="#e5e7eb" gap={20} />
-          <Controls className="bg-white/80 backdrop-blur-sm" />
-          <MiniMap
-            className="bg-white/80 backdrop-blur-sm"
-            nodeColor={(node) => {
-              switch (node.type) {
-                case "promptNode":
-                  return "#3b82f6";
-                case "toolNode":
-                  return "#8b5cf6";
-                case "resultNode":
-                  return "#10b981";
-                default:
-                  return "#6b7280";
-              }
-            }}
-          />
-        </ReactFlow>
-      </div>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            nodeTypes={nodeTypes}
+            fitView
+            attributionPosition="bottom-left"
+            className="bg-gray-900"
+            style={{ background: "#111827" }}
+          >
+            <Background color="#374151" gap={20} />
+            <Controls className="bg-gray-800 border border-gray-600" />
+            <MiniMap
+              nodeColor="#6b7280"
+              maskColor="rgba(17, 24, 39, 0.8)"
+              className="bg-gray-800 border border-gray-600"
+            />
+          </ReactFlow>
+        </div>
 
-      {/* Instructions */}
-      <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-        <h4 className="font-semibold text-blue-800 mb-2">💡 How to use:</h4>
-        <ul className="text-sm text-blue-700 space-y-1">
-          <li>• Edit the prompt in the first node</li>
-          <li>• Select your tool in the middle node</li>
-          <li>• Click &quot;Run Flow&quot; to execute and see results</li>
-          <li>• Drag nodes around to reorganize your workflow</li>
-        </ul>
+        {/* Instructions */}
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="p-6 bg-gray-700 border border-gray-600 rounded-xl">
+            <div className="flex items-center mb-3">
+              <span className="text-2xl mr-3">1️⃣</span>
+              <h3
+                className="font-bold text-white"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                Enter Prompt
+              </h3>
+            </div>
+            <p
+              className="text-gray-300 text-sm"
+              style={{ fontFamily: "'Open Sans', sans-serif" }}
+            >
+              Click on the blue prompt node and enter your AI instruction in the
+              text area.
+            </p>
+          </div>
+
+          <div className="p-6 bg-gray-700 border border-gray-600 rounded-xl">
+            <div className="flex items-center mb-3">
+              <span className="text-2xl mr-3">2️⃣</span>
+              <h3
+                className="font-bold text-white"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                Select Tool
+              </h3>
+            </div>
+            <p
+              className="text-gray-300 text-sm"
+              style={{ fontFamily: "'Open Sans', sans-serif" }}
+            >
+              Choose your processing method in the purple tool node (Web Search
+              or Calculator).
+            </p>
+          </div>
+
+          <div className="p-6 bg-gray-700 border border-gray-600 rounded-xl">
+            <div className="flex items-center mb-3">
+              <span className="text-2xl mr-3">3️⃣</span>
+              <h3
+                className="font-bold text-white"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                Execute Flow
+              </h3>
+            </div>
+            <p
+              className="text-gray-300 text-sm"
+              style={{ fontFamily: "'Open Sans', sans-serif" }}
+            >
+              Click "Execute Flow" to run your AI agent and see results in the
+              green output node.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SimpleMode from "../components/SimpleMode";
 import VisualMode from "../components/VisualMode";
+import { Button } from "../components/ui/button";
 import Head from "next/head";
 
 export default function Home() {
@@ -35,13 +36,23 @@ export default function Home() {
           <div className="text-center mb-16">
             {/* Main Title */}
             <h1
-              className="font-normal main-gradient text-3xl sm:text-4xl lg:text-5xl mb-6 leading-tight tracking-tight"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
+              className="font-normal text-3xl sm:text-4xl lg:text-5xl"
+              style={{
+                fontFamily: "'Poppins', sans-serif",
+                background:
+                  "linear-gradient(135deg, #ffffff 0%, #c0c0c0 50%, #a8a8a8 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
               Power Every Agent Runner
               <br />
               Touchpoint – at Scale.
             </h1>
+
+            <br />
+            <br />
 
             <p
               className="text-lg text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed font-normal"
@@ -60,8 +71,10 @@ export default function Home() {
             <div className="flex justify-center mb-16">
               <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-1 shadow-2xl">
                 <div className="flex space-x-1">
-                  <button
+                  <Button
                     onClick={() => setActiveTab("simple")}
+                    variant={activeTab === "simple" ? "default" : "ghost"}
+                    size="lg"
                     className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                       activeTab === "simple"
                         ? "bg-gray-900 text-white shadow-xl"
@@ -76,10 +89,12 @@ export default function Home() {
                       <span className="text-lg">📝</span>
                       <span className="tracking-wide">Simple Mode</span>
                     </div>
-                  </button>
+                  </Button>
 
-                  <button
+                  <Button
                     onClick={() => setActiveTab("visual")}
+                    variant={activeTab === "visual" ? "default" : "ghost"}
+                    size="lg"
                     className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                       activeTab === "visual"
                         ? "bg-gray-900 text-white shadow-xl"
@@ -94,7 +109,7 @@ export default function Home() {
                       <span className="text-lg">🎨</span>
                       <span className="tracking-wide">Visual Flow</span>
                     </div>
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
