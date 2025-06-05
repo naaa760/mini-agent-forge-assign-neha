@@ -57,7 +57,7 @@ function PromptNode({ data, selected }) {
             value={data.prompt}
             onChange={(e) => data.onPromptChange(e.target.value)}
             placeholder="Enter your AI instruction here..."
-            className="w-full p-4 border-2 border-gray-700/30 rounded-xl text-sm resize-none focus:border-amber-700/60 focus:ring-2 focus:ring-amber-700/30 transition-all duration-300 bg-brown-900/60 text-white placeholder:text-beige-400 hover:bg-brown-800/60 group-hover:border-gray-600/40 shadow-inner"
+            className="w-full p-4 border-2 border-gray-700/30 rounded-xl text-sm resize-none focus:border-amber-700/60 focus:ring-2 focus:ring-amber-700/30 bg-brown-900/60 text-white placeholder:text-beige-400 hover:bg-brown-800/60 group-hover:border-gray-600/40 shadow-inner"
             style={{ fontFamily: "'Open Sans', sans-serif" }}
             rows={3}
             maxLength={1000}
@@ -71,7 +71,7 @@ function PromptNode({ data, selected }) {
         </div>
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-center text-xs text-white/70">
-            <div className="w-2 h-2 bg-amber-600 rounded-full mr-2 animate-pulse shadow-sm shadow-amber-600/40"></div>
+            <div className="w-2 h-2 bg-amber-600 rounded-full mr-2 shadow-sm shadow-amber-600/40"></div>
             <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
               Input Node
             </span>
@@ -81,7 +81,7 @@ function PromptNode({ data, selected }) {
             style={{ fontFamily: "'Quicksand', sans-serif" }}
           >
             <span>Start here</span>
-            <span className="ml-1 animate-pulse">→</span>
+            <span className="ml-1">→</span>
           </div>
         </div>
       </div>
@@ -145,17 +145,14 @@ function ToolNode({ data, selected }) {
               key={tool.id}
               onClick={() => data.onToolChange(tool.id)}
               className={cn(
-                "w-full p-3 rounded-xl border-2 text-left transition-all duration-400 group relative overflow-hidden",
-                "hover:scale-105",
+                "w-full p-3 rounded-xl border-2 text-left group relative overflow-hidden",
                 data.tool === tool.id
                   ? `border-amber-700/60 bg-gradient-to-br ${tool.gradient} text-white shadow-lg shadow-amber-700/20`
                   : "border-gray-700/30 hover:border-gray-600/40 bg-brown-900/60 hover:bg-brown-800/60 text-white backdrop-blur-sm"
               )}
             >
               <div className="flex items-center relative z-10">
-                <span className="text-lg mr-3 transform group-hover:scale-110 transition-transform duration-300">
-                  {tool.icon}
-                </span>
+                <span className="text-lg mr-3">{tool.icon}</span>
                 <div className="flex-1">
                   <div
                     className="font-semibold text-md mb-1"
@@ -174,20 +171,17 @@ function ToolNode({ data, selected }) {
                   </div>
                 </div>
                 {data.tool === tool.id && (
-                  <div className="text-white animate-bounce">
+                  <div className="text-white">
                     <span className="text-lg">✨</span>
                   </div>
                 )}
               </div>
-              {data.tool !== tool.id && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/3 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              )}
             </button>
           ))}
         </div>
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-center text-xs text-white/70">
-            <div className="w-2 h-2 bg-amber-600 rounded-full mr-2 animate-pulse shadow-sm shadow-amber-600/40"></div>
+            <div className="w-2 h-2 bg-amber-600 rounded-full mr-2 shadow-sm shadow-amber-600/40"></div>
             <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
               Processing Node
             </span>
@@ -196,9 +190,9 @@ function ToolNode({ data, selected }) {
             className="text-xs text-white/70 flex items-center"
             style={{ fontFamily: "'Quicksand', sans-serif" }}
           >
-            <span className="animate-pulse">←</span>
+            <span>←</span>
             <span className="mx-1">Process</span>
-            <span className="animate-pulse">→</span>
+            <span>→</span>
           </div>
         </div>
       </div>
@@ -245,7 +239,7 @@ function ResultNode({ data, selected }) {
             >
               {data.isLoading ? (
                 <div className="flex items-center justify-center py-3">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-amber-600 mr-2"></div>
+                  <div className="rounded-full h-5 w-5 border-b-2 border-amber-600 mr-2"></div>
                   <span className="text-white/80">AI is processing...</span>
                 </div>
               ) : (
@@ -265,7 +259,7 @@ function ResultNode({ data, selected }) {
         </div>
         <div className="mt-3 flex items-center justify-between">
           <div className="flex items-center text-xs text-white/70">
-            <div className="w-2 h-2 bg-amber-600 rounded-full mr-2 animate-pulse shadow-sm shadow-amber-600/40"></div>
+            <div className="w-2 h-2 bg-amber-600 rounded-full mr-2 shadow-sm shadow-amber-600/40"></div>
             <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
               Output Node
             </span>
@@ -411,7 +405,7 @@ export default function VisualMode() {
                 className="text-2xl font-bold text-white flex items-center"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                <span className="mr-3 text-3xl animate-pulse">🎨</span>
+                <span className="mr-3 text-3xl">🎨</span>
                 Visual AI Workflow
               </h2>
               <p
@@ -424,7 +418,7 @@ export default function VisualMode() {
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 bg-amber-700/10 backdrop-blur-sm rounded-full px-3 py-2 border border-amber-700/20">
-                <div className="w-2 h-2 bg-amber-600 rounded-full animate-pulse shadow-lg shadow-amber-600/40"></div>
+                <div className="w-2 h-2 bg-amber-600 rounded-full shadow-lg shadow-amber-600/40"></div>
                 <span
                   className="text-white font-medium text-sm"
                   style={{ fontFamily: "'Quicksand', sans-serif" }}
@@ -436,25 +430,22 @@ export default function VisualMode() {
                 onClick={runFlow}
                 disabled={isLoading || !prompt.trim()}
                 className={cn(
-                  "px-6 py-3 rounded-xl font-bold text-md transition-all duration-400",
-                  "flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95",
+                  "px-6 py-3 rounded-xl font-bold text-md",
+                  "flex items-center space-x-2 shadow-lg hover:shadow-xl",
                   isLoading || !prompt.trim()
                     ? "bg-brown-600 text-beige-300 cursor-not-allowed"
                     : "bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white shadow-amber-700/20 hover:shadow-amber-700/30 relative overflow-hidden"
                 )}
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                {!isLoading && !prompt.trim() && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full animate-pulse"></div>
-                )}
                 {isLoading ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <div className="rounded-full h-5 w-5 border-b-2 border-white"></div>
                     <span>Running...</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-xl animate-pulse">▶️</span>
+                    <span className="text-xl">▶️</span>
                     <span>Execute Flow</span>
                   </>
                 )}

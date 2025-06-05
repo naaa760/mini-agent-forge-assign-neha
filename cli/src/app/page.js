@@ -75,7 +75,7 @@ export default function Home() {
                     onClick={() => setActiveTab("simple")}
                     variant={activeTab === "simple" ? "default" : "ghost"}
                     size="lg"
-                    className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                    className={`px-6 py-3 rounded-xl font-semibold text-sm ${
                       activeTab === "simple"
                         ? "bg-gray-900 text-white shadow-xl"
                         : "text-gray-300 hover:text-white hover:bg-white/10"
@@ -95,7 +95,7 @@ export default function Home() {
                     onClick={() => setActiveTab("visual")}
                     variant={activeTab === "visual" ? "default" : "ghost"}
                     size="lg"
-                    className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                    className={`px-6 py-3 rounded-xl font-semibold text-sm ${
                       activeTab === "visual"
                         ? "bg-gray-900 text-white shadow-xl"
                         : "text-gray-300 hover:text-white hover:bg-white/10"
@@ -118,7 +118,7 @@ export default function Home() {
           {/* Tab Content */}
           <div className="mb-16">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl">
-              <div className="transition-opacity duration-300">
+              <div>
                 {activeTab === "simple" ? <SimpleMode /> : <VisualMode />}
               </div>
             </div>
