@@ -93,16 +93,16 @@ export default function SimpleMode() {
       name: "Web Search",
       icon: "🔍",
       description: "Search the internet for information",
-      color: "lime",
-      gradient: "from-lime-500 to-lime-600",
+      color: "amber",
+      gradient: "from-amber-700 to-amber-800",
     },
     {
       id: "calculator",
       name: "Calculator",
       icon: "🧮",
       description: "Solve mathematical problems",
-      color: "lime",
-      gradient: "from-lime-600 to-lime-700",
+      color: "amber",
+      gradient: "from-amber-800 to-amber-900",
     },
   ];
 
@@ -154,7 +154,7 @@ export default function SimpleMode() {
               </div>
               <div className="hidden sm:flex items-center space-x-2 text-xs text-white">
                 <div className="flex items-center">
-                  <div className="w-1.5 h-1.5 bg-lime-400 rounded-full mr-1"></div>
+                  <div className="w-1.5 h-1.5 bg-amber-600 rounded-full mr-1"></div>
                   <span style={{ fontFamily: "'Quicksand', sans-serif" }}>
                     Ready
                   </span>
@@ -181,8 +181,8 @@ export default function SimpleMode() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   className={cn(
-                    "w-full px-4 py-3 border-2 border-brown-600 rounded-xl transition-all duration-300 resize-none",
-                    "focus:ring-2 focus:ring-lime-500/50 focus:border-lime-500",
+                    "w-full px-4 py-3 border-2 border-gray-700/40 rounded-xl transition-all duration-300 resize-none",
+                    "focus:ring-2 focus:ring-amber-700/50 focus:border-amber-700",
                     "placeholder:text-beige-400 text-white text-md leading-relaxed",
                     "bg-brown-800",
                     "hover:bg-brown-700"
@@ -221,8 +221,8 @@ export default function SimpleMode() {
                       "p-4 rounded-xl border-2 text-left transition-all duration-300 group relative overflow-hidden",
                       "hover:scale-105",
                       tool === toolItem.id
-                        ? `border-lime-400 bg-gradient-to-br ${toolItem.gradient} text-white shadow-lg`
-                        : "border-brown-600 hover:border-beige-500 bg-brown-800 hover:bg-brown-700 text-white"
+                        ? `border-amber-700/60 bg-gradient-to-br ${toolItem.gradient} text-white shadow-lg`
+                        : "border-gray-700/30 hover:border-gray-600/50 bg-brown-800 hover:bg-brown-700 text-white"
                     )}
                   >
                     <div className="flex items-center relative z-10">
@@ -275,12 +275,12 @@ export default function SimpleMode() {
                       setPrompt(example.text);
                       setTool(example.tool);
                     }}
-                    className="p-3 rounded-lg border border-brown-600 text-left hover:border-beige-500 hover:bg-brown-700 transition-all duration-200 group bg-brown-800"
+                    className="p-3 rounded-lg border border-gray-700/20 text-left hover:border-gray-600/40 hover:bg-brown-700 transition-all duration-200 group bg-brown-800"
                   >
                     <div className="flex items-center">
                       <span className="text-md mr-2">{example.icon}</span>
                       <span
-                        className="text-white text-sm group-hover:text-lime-300 transition-colors"
+                        className="text-white text-sm group-hover:text-amber-300 transition-colors"
                         style={{ fontFamily: "'Open Sans', sans-serif" }}
                       >
                         {example.text}
@@ -300,13 +300,13 @@ export default function SimpleMode() {
                 "flex items-center justify-center space-x-2",
                 isLoading || !prompt.trim()
                   ? "bg-brown-600 text-beige-300 cursor-not-allowed"
-                  : "bg-gradient-to-r from-lime-500 to-lime-600 hover:from-lime-600 hover:to-lime-700 text-black shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+                  : "bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
               )}
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               {isLoading ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                   <span>Processing...</span>
                 </>
               ) : (
@@ -328,7 +328,7 @@ export default function SimpleMode() {
                 <span className="mr-2 text-xl">📋</span>
                 Result
               </h3>
-              <div className="bg-brown-800 border border-brown-600 rounded-xl p-4">
+              <div className="bg-brown-800 border border-gray-700/20 rounded-xl p-4">
                 {error ? (
                   <div className="text-white">
                     <div className="flex items-center mb-2">
@@ -357,13 +357,13 @@ export default function SimpleMode() {
                       {isLoading && (
                         <div className="ml-2 animate-pulse">
                           <div className="flex space-x-1">
-                            <div className="w-1.5 h-1.5 bg-lime-400 rounded-full animate-bounce"></div>
+                            <div className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-bounce"></div>
                             <div
-                              className="w-1.5 h-1.5 bg-lime-400 rounded-full animate-bounce"
+                              className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-bounce"
                               style={{ animationDelay: "0.1s" }}
                             ></div>
                             <div
-                              className="w-1.5 h-1.5 bg-lime-400 rounded-full animate-bounce"
+                              className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-bounce"
                               style={{ animationDelay: "0.2s" }}
                             ></div>
                           </div>
@@ -411,14 +411,14 @@ export default function SimpleMode() {
                       setPrompt(run.prompt);
                       setTool(run.tool);
                     }}
-                    className="w-full p-3 rounded-lg border border-brown-600 text-left hover:border-beige-500 hover:bg-brown-700 transition-all duration-200 group bg-brown-800"
+                    className="w-full p-3 rounded-lg border border-gray-700/20 text-left hover:border-gray-600/40 hover:bg-brown-700 transition-all duration-200 group bg-brown-800"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <span
                         className={cn(
                           "text-xs px-2 py-1 rounded-full",
                           run.status === "completed"
-                            ? "bg-lime-500/20 text-lime-400"
+                            ? "bg-amber-700/20 text-amber-400"
                             : run.status === "error"
                             ? "bg-red-500/20 text-red-400"
                             : "bg-beige-500/20 text-beige-400"
@@ -435,7 +435,7 @@ export default function SimpleMode() {
                       </span>
                     </div>
                     <p
-                      className="text-white text-sm line-clamp-2 group-hover:text-lime-300 transition-colors"
+                      className="text-white text-sm line-clamp-2 group-hover:text-amber-300 transition-colors"
                       style={{ fontFamily: "'Open Sans', sans-serif" }}
                     >
                       {run.prompt}

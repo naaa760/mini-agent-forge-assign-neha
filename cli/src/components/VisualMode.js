@@ -28,7 +28,7 @@ function PromptNode({ data, selected }) {
         "px-6 py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-72 backdrop-blur-sm relative overflow-hidden",
         selected
           ? "border-amber-700/60 ring-3 ring-amber-700/30 shadow-amber-700/20"
-          : "border-brown-600/40 hover:border-amber-600/50 hover:shadow-amber-600/15"
+          : "border-gray-700/30 hover:border-amber-600/50 hover:shadow-amber-600/15"
       )}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-amber-700/5 via-transparent to-amber-800/5"></div>
@@ -57,7 +57,7 @@ function PromptNode({ data, selected }) {
             value={data.prompt}
             onChange={(e) => data.onPromptChange(e.target.value)}
             placeholder="Enter your AI instruction here..."
-            className="w-full p-4 border-2 border-brown-600/40 rounded-xl text-sm resize-none focus:border-amber-700/60 focus:ring-2 focus:ring-amber-700/30 transition-all duration-300 bg-brown-900/60 text-white placeholder:text-beige-400 hover:bg-brown-800/60 group-hover:border-brown-500/50 shadow-inner"
+            className="w-full p-4 border-2 border-gray-700/30 rounded-xl text-sm resize-none focus:border-amber-700/60 focus:ring-2 focus:ring-amber-700/30 transition-all duration-300 bg-brown-900/60 text-white placeholder:text-beige-400 hover:bg-brown-800/60 group-hover:border-gray-600/40 shadow-inner"
             style={{ fontFamily: "'Open Sans', sans-serif" }}
             rows={3}
             maxLength={1000}
@@ -115,7 +115,7 @@ function ToolNode({ data, selected }) {
         "px-6 py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-64 backdrop-blur-sm relative overflow-hidden",
         selected
           ? "border-amber-700/60 ring-3 ring-amber-700/30 shadow-amber-700/20"
-          : "border-brown-600/40 hover:border-amber-600/50 hover:shadow-amber-600/15"
+          : "border-gray-700/30 hover:border-amber-600/50 hover:shadow-amber-600/15"
       )}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-amber-700/5 via-transparent to-amber-800/5"></div>
@@ -149,7 +149,7 @@ function ToolNode({ data, selected }) {
                 "hover:scale-105",
                 data.tool === tool.id
                   ? `border-amber-700/60 bg-gradient-to-br ${tool.gradient} text-white shadow-lg shadow-amber-700/20`
-                  : "border-brown-600/40 hover:border-brown-500/50 bg-brown-900/60 hover:bg-brown-800/60 text-white backdrop-blur-sm"
+                  : "border-gray-700/30 hover:border-gray-600/40 bg-brown-900/60 hover:bg-brown-800/60 text-white backdrop-blur-sm"
               )}
             >
               <div className="flex items-center relative z-10">
@@ -213,7 +213,7 @@ function ResultNode({ data, selected }) {
         "px-6 py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-72 backdrop-blur-sm relative overflow-hidden",
         selected
           ? "border-amber-700/60 ring-3 ring-amber-700/30 shadow-amber-700/20"
-          : "border-brown-600/40 hover:border-amber-600/50 hover:shadow-amber-600/15"
+          : "border-gray-700/30 hover:border-amber-600/50 hover:shadow-amber-600/15"
       )}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-amber-700/5 via-transparent to-amber-800/5"></div>
@@ -237,7 +237,7 @@ function ResultNode({ data, selected }) {
             </div>
           </div>
         </div>
-        <div className="bg-brown-900/80 border border-brown-600/40 rounded-xl p-4 max-h-40 overflow-y-auto backdrop-blur-sm shadow-inner">
+        <div className="bg-brown-900/80 border border-gray-700/20 rounded-xl p-4 max-h-40 overflow-y-auto backdrop-blur-sm shadow-inner">
           {data.result ? (
             <div
               className="text-white text-sm leading-relaxed"
@@ -249,7 +249,7 @@ function ResultNode({ data, selected }) {
                   <span className="text-white/80">AI is processing...</span>
                 </div>
               ) : (
-                <pre className="whitespace-pre-wrap font-sans bg-brown-800/50 p-3 rounded-lg border border-brown-700/40">
+                <pre className="whitespace-pre-wrap font-sans bg-brown-800/50 p-3 rounded-lg border border-gray-700/20">
                   {data.result}
                 </pre>
               )}
@@ -404,7 +404,7 @@ export default function VisualMode() {
     <div className="bg-black p-6 rounded-lg">
       <div className="space-y-6">
         {/* Header */}
-        <div className="bg-brown-800/80 backdrop-blur-sm rounded-xl p-6 border border-brown-600/30 shadow-lg">
+        <div className="bg-brown-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-700/20 shadow-lg">
           <div className="flex items-center justify-between">
             <div>
               <h2
@@ -465,7 +465,7 @@ export default function VisualMode() {
 
         {/* Visual Flow */}
         <div
-          className="bg-brown-900/90 border border-brown-700/30 rounded-xl p-4 shadow-xl backdrop-blur-sm"
+          className="bg-brown-900/90 border border-gray-700/20 rounded-xl p-4 shadow-xl backdrop-blur-sm"
           style={{ height: "550px" }}
         >
           <ReactFlow
@@ -488,18 +488,18 @@ export default function VisualMode() {
               size={1}
               style={{ opacity: 0.2 }}
             />
-            <Controls className="bg-brown-800/90 border border-brown-600/30 rounded-lg shadow-lg backdrop-blur-sm" />
+            <Controls className="bg-brown-800/90 border border-gray-700/20 rounded-lg shadow-lg backdrop-blur-sm" />
             <MiniMap
               nodeColor="#78716c"
               maskColor="rgba(28, 25, 23, 0.8)"
-              className="bg-brown-800/90 border border-brown-600/30 rounded-lg shadow-lg backdrop-blur-sm"
+              className="bg-brown-800/90 border border-gray-700/20 rounded-lg shadow-lg backdrop-blur-sm"
             />
           </ReactFlow>
         </div>
 
         {/* Instructions */}
         <div className="grid md:grid-cols-3 gap-4">
-          <div className="p-6 bg-brown-800/80 border border-brown-600/30 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+          <div className="p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
             <div className="flex items-center mb-3">
               <span className="text-2xl mr-3 transform group-hover:scale-110 transition-transform duration-300">
                 1️⃣
@@ -520,7 +520,7 @@ export default function VisualMode() {
             </p>
           </div>
 
-          <div className="p-6 bg-brown-800/80 border border-brown-600/30 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+          <div className="p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
             <div className="flex items-center mb-3">
               <span className="text-2xl mr-3 transform group-hover:scale-110 transition-transform duration-300">
                 2️⃣
@@ -541,7 +541,7 @@ export default function VisualMode() {
             </p>
           </div>
 
-          <div className="p-6 bg-brown-800/80 border border-brown-600/30 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+          <div className="p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
             <div className="flex items-center mb-3">
               <span className="text-2xl mr-3 transform group-hover:scale-110 transition-transform duration-300">
                 3️⃣
