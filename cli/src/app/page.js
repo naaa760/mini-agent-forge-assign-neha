@@ -123,53 +123,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* Status Footer */}
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl px-6 py-3 shadow-xl">
-              <div className="flex items-center space-x-6">
-                <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 shadow-sm"></div>
-                  <span
-                    className="text-gray-300 text-xs font-medium group-hover:text-green-400 transition-colors"
-                    style={{ fontFamily: "'Quicksand', sans-serif" }}
-                  >
-                    Backend Ready
-                  </span>
-                </div>
-
-                <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 shadow-sm"></div>
-                  <span
-                    className="text-gray-300 text-xs font-medium group-hover:text-blue-400 transition-colors"
-                    style={{ fontFamily: "'Quicksand', sans-serif" }}
-                  >
-                    Neon PostgreSQL
-                  </span>
-                </div>
-
-                <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-red-400 rounded-full mr-2 shadow-sm"></div>
-                  <span
-                    className="text-gray-300 text-xs font-medium group-hover:text-red-400 transition-colors"
-                    style={{ fontFamily: "'Quicksand', sans-serif" }}
-                  >
-                    Redis Cache
-                  </span>
-                </div>
-
-                <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full mr-2 shadow-sm"></div>
-                  <span
-                    className="text-gray-300 text-xs font-medium group-hover:text-orange-400 transition-colors"
-                    style={{ fontFamily: "'Quicksand', sans-serif" }}
-                  >
-                    Groq LLM
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>
