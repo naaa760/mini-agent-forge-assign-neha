@@ -112,7 +112,7 @@ function ToolNode({ data, selected }) {
   return (
     <div
       className={cn(
-        "px-6 py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-64 backdrop-blur-sm relative overflow-hidden",
+        "px-4 sm:px-6 py-3 sm:py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-56 sm:min-w-64 backdrop-blur-sm relative overflow-hidden",
         selected
           ? "border-amber-700/60 ring-3 ring-amber-700/30 shadow-amber-700/20"
           : "border-gray-700/30 hover:border-amber-600/50 hover:shadow-amber-600/15"
@@ -204,7 +204,7 @@ function ResultNode({ data, selected }) {
   return (
     <div
       className={cn(
-        "px-6 py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-72 backdrop-blur-sm relative overflow-hidden",
+        "px-4 sm:px-6 py-3 sm:py-4 shadow-lg rounded-2xl bg-brown-800 border-2 min-w-60 sm:min-w-72 backdrop-blur-sm relative overflow-hidden",
         selected
           ? "border-amber-700/60 ring-3 ring-amber-700/30 shadow-amber-700/20"
           : "border-gray-700/30 hover:border-amber-600/50 hover:shadow-amber-600/15"
@@ -232,21 +232,19 @@ function ResultNode({ data, selected }) {
           </div>
         </div>
         <div className="bg-brown-900/80 border border-gray-700/20 rounded-xl p-4 max-h-40 overflow-y-auto backdrop-blur-sm shadow-inner">
-          {data.result ? (
+          {data.isLoading ? (
+            <div className="flex items-center justify-center py-6">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-600 mr-3"></div>
+              <span className="text-white/80 text-sm">AI is processing...</span>
+            </div>
+          ) : data.result ? (
             <div
               className="text-white text-sm leading-relaxed"
               style={{ fontFamily: "'Open Sans', sans-serif" }}
             >
-              {data.isLoading ? (
-                <div className="flex items-center justify-center py-3">
-                  <div className="rounded-full h-5 w-5 border-b-2 border-amber-600 mr-2"></div>
-                  <span className="text-white/80">AI is processing...</span>
-                </div>
-              ) : (
-                <pre className="whitespace-pre-wrap font-sans bg-brown-800/50 p-3 rounded-lg border border-gray-700/20">
-                  {data.result}
-                </pre>
-              )}
+              <pre className="whitespace-pre-wrap font-sans bg-brown-800/50 p-3 rounded-lg border border-gray-700/20">
+                {data.result}
+              </pre>
             </div>
           ) : (
             <div className="text-center py-4">
@@ -288,7 +286,7 @@ export default function VisualMode() {
     {
       id: "prompt-1",
       type: "promptNode",
-      position: { x: 80, y: 80 },
+      position: { x: 50, y: 50 },
       data: {
         prompt,
         onPromptChange: setPrompt,
@@ -297,7 +295,7 @@ export default function VisualMode() {
     {
       id: "tool-1",
       type: "toolNode",
-      position: { x: 400, y: 80 },
+      position: { x: 320, y: 50 },
       data: {
         tool,
         onToolChange: setTool,
@@ -306,7 +304,7 @@ export default function VisualMode() {
     {
       id: "result-1",
       type: "resultNode",
-      position: { x: 720, y: 80 },
+      position: { x: 580, y: 50 },
       data: {
         result,
         isLoading,
@@ -395,29 +393,28 @@ export default function VisualMode() {
   }, [prompt, tool, result, isLoading, error, setNodes]);
 
   return (
-    <div className="bg-black p-6 rounded-lg">
-      <div className="space-y-6">
+    <div className="bg-black p-3 sm:p-6 rounded-lg">
+      <div className="space-y-4 sm:space-y-6">
         {/* Header */}
-        <div className="bg-brown-800/80 backdrop-blur-sm rounded-xl p-6 border border-gray-700/20 shadow-lg">
-          <div className="flex items-center justify-between">
+        <div className="bg-brown-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-700/20 shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <div>
               <h2
-                className="text-2xl font-bold text-white flex items-center"
+                className="text-xl sm:text-2xl font-bold text-white flex items-center"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                <span className="mr-3 text-3xl">🎨</span>
+                <span className="mr-2 sm:mr-3 text-2xl sm:text-3xl">🎨</span>
                 Visual AI Workflow
               </h2>
               <p
-                className="text-white/80 mt-1 text-md"
+                className="text-white/80 mt-1 text-sm sm:text-md"
                 style={{ fontFamily: "'Open Sans', sans-serif" }}
               >
-                Build and visualize your AI agent pipeline with drag-and-drop
-                nodes
+                Build and visualize your AI agent pipeline
               </p>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-amber-700/10 backdrop-blur-sm rounded-full px-3 py-2 border border-amber-700/20">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+              <div className="flex items-center justify-center sm:justify-start space-x-2 bg-amber-700/10 backdrop-blur-sm rounded-full px-3 py-2 border border-amber-700/20">
                 <div className="w-2 h-2 bg-amber-600 rounded-full shadow-lg shadow-amber-600/40"></div>
                 <span
                   className="text-white font-medium text-sm"
@@ -430,8 +427,8 @@ export default function VisualMode() {
                 onClick={runFlow}
                 disabled={isLoading || !prompt.trim()}
                 className={cn(
-                  "px-6 py-3 rounded-xl font-bold text-md",
-                  "flex items-center space-x-2 shadow-lg hover:shadow-xl",
+                  "px-4 sm:px-6 py-3 rounded-xl font-bold text-sm sm:text-md",
+                  "flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl w-full sm:w-auto",
                   isLoading || !prompt.trim()
                     ? "bg-brown-600 text-beige-300 cursor-not-allowed"
                     : "bg-gradient-to-r from-amber-700 to-amber-800 hover:from-amber-800 hover:to-amber-900 text-white shadow-amber-700/20 hover:shadow-amber-700/30 relative overflow-hidden"
@@ -440,7 +437,7 @@ export default function VisualMode() {
               >
                 {isLoading ? (
                   <>
-                    <div className="rounded-full h-5 w-5 border-b-2 border-white"></div>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                     <span>Running...</span>
                   </>
                 ) : (
@@ -456,8 +453,8 @@ export default function VisualMode() {
 
         {/* Visual Flow */}
         <div
-          className="bg-brown-900/90 border border-gray-700/20 rounded-xl p-4 shadow-xl backdrop-blur-sm"
-          style={{ height: "550px" }}
+          className="bg-brown-900/90 border border-gray-700/20 rounded-xl p-2 sm:p-4 shadow-xl backdrop-blur-sm"
+          style={{ height: "400px", minHeight: "300px" }}
         >
           <ReactFlow
             nodes={nodes}
@@ -471,6 +468,12 @@ export default function VisualMode() {
             style={{
               background:
                 "linear-gradient(135deg, #1c1917 0%, #292524 50%, #1c1917 100%)",
+            }}
+            fitViewOptions={{
+              padding: 0.1,
+              includeHiddenNodes: false,
+              minZoom: 0.3,
+              maxZoom: 1.5,
             }}
           >
             <Background
@@ -489,67 +492,66 @@ export default function VisualMode() {
         </div>
 
         {/* Instructions */}
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="p-4 sm:p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
             <div className="flex items-center mb-3">
-              <span className="text-2xl mr-3 transform group-hover:scale-110 transition-transform duration-300">
+              <span className="text-xl sm:text-2xl mr-2 sm:mr-3 transform group-hover:scale-110 transition-transform duration-300">
                 1️⃣
               </span>
               <h3
-                className="font-bold text-lg text-white"
+                className="font-bold text-base sm:text-lg text-white"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Enter Prompt
               </h3>
             </div>
             <p
-              className="text-white/80 text-sm leading-relaxed"
+              className="text-white/80 text-xs sm:text-sm leading-relaxed"
               style={{ fontFamily: "'Open Sans', sans-serif" }}
             >
-              Click on the brown prompt node and enter your AI instruction in
-              the text area to get started.
+              Click on the brown prompt node and enter your AI instruction to
+              get started.
             </p>
           </div>
 
-          <div className="p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+          <div className="p-4 sm:p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
             <div className="flex items-center mb-3">
-              <span className="text-2xl mr-3 transform group-hover:scale-110 transition-transform duration-300">
+              <span className="text-xl sm:text-2xl mr-2 sm:mr-3 transform group-hover:scale-110 transition-transform duration-300">
                 2️⃣
               </span>
               <h3
-                className="font-bold text-lg text-white"
+                className="font-bold text-base sm:text-lg text-white"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Select Tool
               </h3>
             </div>
             <p
-              className="text-white/80 text-sm leading-relaxed"
+              className="text-white/80 text-xs sm:text-sm leading-relaxed"
               style={{ fontFamily: "'Open Sans', sans-serif" }}
             >
-              Choose your processing method in the amber tool node - Web Search
-              or Calculator.
+              Choose your processing method - Web Search or Calculator.
             </p>
           </div>
 
-          <div className="p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+          <div className="p-4 sm:p-6 bg-brown-800/80 border border-gray-700/20 rounded-xl backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300 group sm:col-span-2 md:col-span-1">
             <div className="flex items-center mb-3">
-              <span className="text-2xl mr-3 transform group-hover:scale-110 transition-transform duration-300">
+              <span className="text-xl sm:text-2xl mr-2 sm:mr-3 transform group-hover:scale-110 transition-transform duration-300">
                 3️⃣
               </span>
               <h3
-                className="font-bold text-lg text-white"
+                className="font-bold text-base sm:text-lg text-white"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Execute Flow
               </h3>
             </div>
             <p
-              className="text-white/80 text-sm leading-relaxed"
+              className="text-white/80 text-xs sm:text-sm leading-relaxed"
               style={{ fontFamily: "'Open Sans', sans-serif" }}
             >
               Click &quot;Execute Flow&quot; to run your AI agent and see
-              results in the output node.
+              results.
             </p>
           </div>
         </div>
