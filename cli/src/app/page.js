@@ -33,63 +33,39 @@ export default function Home() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-16">
           {/* Header */}
           <div className="text-center mb-16">
-            {/* Badge */}
-            <div className="inline-flex items-center bg-gradient-to-r from-purple-600/30 to-gray-400/20 border border-purple-400/40 rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
-              <span
-                className="bg-gradient-to-r from-purple-600 to-purple-700 text-white text-xs font-semibold px-2.5 py-1 rounded-full mr-2 shadow-lg"
-                style={{ fontFamily: "'Quicksand', sans-serif" }}
-              >
-                New
-              </span>
-              <span
-                className="text-purple-200 text-sm font-medium tracking-wide"
-                style={{ fontFamily: "'Quicksand', sans-serif" }}
-              >
-                Automated Lead Generation
-              </span>
-            </div>
-
             {/* Main Title */}
             <h1
-              className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight"
-              style={{ fontFamily: "'Poppins', sans-serif", fontWeight: "700" }}
+              className="font-normal main-gradient text-3xl sm:text-4xl lg:text-5xl mb-6 leading-tight tracking-tight"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
             >
-              Agent Runner
+              Power Every Agent Runner
               <br />
-              <span
-                className="text-white font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  fontWeight: "600",
-                }}
-              >
-                for Modern Businesses.
-              </span>
+              Touchpoint – at Scale.
             </h1>
 
             <p
-              className="text-lg text-gray-200 mb-12 max-w-2xl mx-auto leading-relaxed font-normal"
+              className="text-lg text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed font-normal"
               style={{
                 fontFamily: "'Open Sans', sans-serif",
                 fontWeight: "400",
                 lineHeight: "1.8",
               }}
             >
-              Craft prompts, select tools, and watch AI work its{" "}
-              <span className="text-white font-medium">magic</span> to
-              streamline your workflow.
+              Integrate 300+ wearables, streamline lab operations, and build
+              your own lab testing experience spanning all 50 states – with a
+              single API.
             </p>
 
             {/* Enhanced Tab Navigation */}
             <div className="flex justify-center mb-16">
-              <div className="bg-gradient-to-r from-purple-900/30 to-gray-800/20 backdrop-blur-lg border border-purple-400/30 rounded-2xl p-1 shadow-2xl">
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-1 shadow-2xl">
                 <div className="flex space-x-1">
                   <button
                     onClick={() => setActiveTab("simple")}
                     className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                       activeTab === "simple"
-                        ? "bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-xl shadow-purple-500/25"
-                        : "text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-purple-800/20 hover:to-gray-700/20"
+                        ? "bg-gray-900 text-white shadow-xl"
+                        : "text-gray-300 hover:text-white hover:bg-white/10"
                     }`}
                     style={{
                       fontFamily: "'Raleway', sans-serif",
@@ -106,8 +82,8 @@ export default function Home() {
                     onClick={() => setActiveTab("visual")}
                     className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                       activeTab === "visual"
-                        ? "bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-xl shadow-purple-500/25"
-                        : "text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-purple-800/20 hover:to-gray-700/20"
+                        ? "bg-gray-900 text-white shadow-xl"
+                        : "text-gray-300 hover:text-white hover:bg-white/10"
                     }`}
                     style={{
                       fontFamily: "'Raleway', sans-serif",
@@ -126,7 +102,7 @@ export default function Home() {
 
           {/* Tab Content */}
           <div className="mb-16">
-            <div className="bg-gradient-to-br from-purple-900/20 via-gray-800/10 to-purple-800/15 backdrop-blur-lg border border-purple-400/20 rounded-3xl p-8 shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 shadow-2xl">
               <div className="transition-opacity duration-300">
                 {activeTab === "simple" ? <SimpleMode /> : <VisualMode />}
               </div>
@@ -135,10 +111,10 @@ export default function Home() {
 
           {/* Status Footer */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center bg-gradient-to-r from-purple-900/40 to-gray-800/30 backdrop-blur-lg border border-purple-400/30 rounded-xl px-6 py-3 shadow-xl">
+            <div className="inline-flex items-center justify-center bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl px-6 py-3 shadow-xl">
               <div className="flex items-center space-x-6">
                 <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-green-500 rounded-full mr-2 shadow-sm shadow-green-400/50"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 shadow-sm"></div>
                   <span
                     className="text-gray-300 text-xs font-medium group-hover:text-green-400 transition-colors"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
@@ -148,7 +124,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full mr-2 shadow-sm shadow-blue-400/50"></div>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-2 shadow-sm"></div>
                   <span
                     className="text-gray-300 text-xs font-medium group-hover:text-blue-400 transition-colors"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
@@ -158,7 +134,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-gradient-to-r from-red-400 to-red-500 rounded-full mr-2 shadow-sm shadow-red-400/50"></div>
+                  <div className="w-2 h-2 bg-red-400 rounded-full mr-2 shadow-sm"></div>
                   <span
                     className="text-gray-300 text-xs font-medium group-hover:text-red-400 transition-colors"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
@@ -168,9 +144,9 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center group cursor-pointer">
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full mr-2 shadow-sm shadow-purple-400/50"></div>
+                  <div className="w-2 h-2 bg-orange-400 rounded-full mr-2 shadow-sm"></div>
                   <span
-                    className="text-gray-300 text-xs font-medium group-hover:text-purple-400 transition-colors"
+                    className="text-gray-300 text-xs font-medium group-hover:text-orange-400 transition-colors"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
                   >
                     Groq LLM
