@@ -1,4 +1,3 @@
-// Test script to verify frontend-backend connection
 const API_BASE_URL = "http://localhost:3001";
 
 console.log("🧪 Testing API Connection...");
